@@ -1,6 +1,6 @@
 # IoTeX-Dashboard
 
-Just a simple dashboard done for a (Hackathon)[https://gitcoin.co/issue/iotexproject/halogrants/52/100026522]
+Just a simple dashboard done for a [Hackathon](https://gitcoin.co/issue/iotexproject/halogrants/52/100026522)
 
 ## Screenshots
 ![FrontPage](./github/1.png)  
@@ -9,7 +9,7 @@ Just a simple dashboard done for a (Hackathon)[https://gitcoin.co/issue/iotexpro
 ![Protobuf Decoding](./github/4.png)  
 
 ## Problems
-Doesn't work correctly on vercel due to IoTeX's graph node not supporting SSL correctly.
+~~Doesn't work correctly on vercel due to IoTeX's graph node not supporting SSL correctly.~~ Re-Deployed on Heroku..
 
 ## Diary
 I had fun churning this project out. It was a nice experience to work with React yet again.

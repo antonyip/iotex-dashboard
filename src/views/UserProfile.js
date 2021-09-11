@@ -32,136 +32,40 @@ import {
   Col,
 } from "reactstrap";
 
-function UserProfile() {
+import gql from 'graphql-tag';
+import { useQuery } from "@apollo/client";
+import { useParams } from "react-router";
+
+//account( id: "0x1904bfcb93edc9bf961eead2e5c0de81dcc1d37d")
+let accountQuery = gql`
+    query app ($idaa:String!) {
+        account( id: $idaa )
+        {
+          id
+          name
+          avatar
+        }
+    }
+`
+
+function UserProfile(props) {
+  console.log("idaa", props);
+  console.log("idaa-search", props.location.search);
+
+  let searchString = props.location.search.length > 6 ? props.location.search.substring(6) : "0x1904bfcb93edc9bf961eead2e5c0de81dcc1d37d";
+
+  console.log("idaa-search-string", searchString);
+  const { loading, error, data } = useQuery( accountQuery, { variables: { idaa: searchString }});
+  console.log("data", data);
+
+  if (error) return <div className="content">{error}</div>;
+  if (loading) return <div className="content">Loading...</div>;
+
   return (
     <>
       <div className="content">
         <Row>
-          <Col md="8">
-            <Card>
-              <CardHeader>
-                <h5 className="title">Edit Profile</h5>
-              </CardHeader>
-              <CardBody>
-                <Form>
-                  <Row>
-                    <Col className="pr-md-1" md="5">
-                      <FormGroup>
-                        <label>Company (disabled)</label>
-                        <Input
-                          defaultValue="Creative Code Inc."
-                          disabled
-                          placeholder="Company"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="px-md-1" md="3">
-                      <FormGroup>
-                        <label>Username</label>
-                        <Input
-                          defaultValue="michael23"
-                          placeholder="Username"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-md-1" md="4">
-                      <FormGroup>
-                        <label htmlFor="exampleInputEmail1">
-                          Email address
-                        </label>
-                        <Input placeholder="mike@email.com" type="email" />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pr-md-1" md="6">
-                      <FormGroup>
-                        <label>First Name</label>
-                        <Input
-                          defaultValue="Mike"
-                          placeholder="Company"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-md-1" md="6">
-                      <FormGroup>
-                        <label>Last Name</label>
-                        <Input
-                          defaultValue="Andrew"
-                          placeholder="Last Name"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md="12">
-                      <FormGroup>
-                        <label>Address</label>
-                        <Input
-                          defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                          placeholder="Home Address"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pr-md-1" md="4">
-                      <FormGroup>
-                        <label>City</label>
-                        <Input
-                          defaultValue="Mike"
-                          placeholder="City"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="px-md-1" md="4">
-                      <FormGroup>
-                        <label>Country</label>
-                        <Input
-                          defaultValue="Andrew"
-                          placeholder="Country"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-md-1" md="4">
-                      <FormGroup>
-                        <label>Postal Code</label>
-                        <Input placeholder="ZIP Code" type="number" />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md="8">
-                      <FormGroup>
-                        <label>About Me</label>
-                        <Input
-                          cols="80"
-                          defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                            that two seat Lambo."
-                          placeholder="Here can be your description"
-                          rows="4"
-                          type="textarea"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                </Form>
-              </CardBody>
-              <CardFooter>
-                <Button className="btn-fill" color="primary" type="submit">
-                  Save
-                </Button>
-              </CardFooter>
-            </Card>
-          </Col>
-          <Col md="4">
+          <Col md="4"> 
             <Card className="card-user">
               <CardBody>
                 <CardText />
@@ -170,23 +74,18 @@ function UserProfile() {
                   <div className="block block-two" />
                   <div className="block block-three" />
                   <div className="block block-four" />
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                  {/* <a href="#pablo" onClick={(e) => e.preventDefault()}> */}
                     <img
                       alt="..."
                       className="avatar"
-                      src={require("assets/img/emilyz.jpg").default}
+                      src={data.account.avatar}
                     />
-                    <h5 className="title">Mike Andrew</h5>
-                  </a>
-                  <p className="description">Ceo/Co-Founder</p>
-                </div>
-                <div className="card-description">
-                  Do not be scared of the truth because we need to restart the
-                  human foundation in truth And I love you like Kanye loves
-                  Kanye I love Rick Owens’ bed design but the back is...
+                    <h5 className="title">{data.account.name}</h5>
+                  {/* </a> */}
+                  <p className="description">{data.account.id}</p>
                 </div>
               </CardBody>
-              <CardFooter>
+              {/* <CardFooter>
                 <div className="button-container">
                   <Button className="btn-icon btn-round" color="facebook">
                     <i className="fab fa-facebook" />
@@ -198,7 +97,7 @@ function UserProfile() {
                     <i className="fab fa-google-plus" />
                   </Button>
                 </div>
-              </CardFooter>
+              </CardFooter> */}
             </Card>
           </Col>
         </Row>

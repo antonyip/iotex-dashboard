@@ -71,6 +71,9 @@ function AdminNavbar(props) {
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
   };
+  const triggerSearch = () => {
+    console.log("search triggered");
+  };
   return (
     <>
       <Navbar className={classNames("navbar-absolute", color)} expand="lg">
@@ -181,9 +184,15 @@ function AdminNavbar(props) {
         modalClassName="modal-search"
         isOpen={modalSearch}
         toggle={toggleModalSearch}
+        bzsize="100%"
       >
         <ModalHeader>
-          <Input placeholder="IOTEX DEVICE ID" type="text" />
+          <Input
+            placeholder="ACCOUNT ID"
+            type="text"
+            onKeyDown={triggerSearch}
+            
+           />
           <button
             aria-label="Close"
             className="close"

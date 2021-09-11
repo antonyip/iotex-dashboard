@@ -22,9 +22,8 @@ import classNames from "classnames";
 import { Line, Bar } from "react-chartjs-2";
 
 import _ from 'lodash';
-import { ApolloClient, HttpLink, DefaultOptions, InMemoryCache } from '@apollo/client/core';
-import fetch from 'cross-fetch';
 import gql from 'graphql-tag';
+import { useQuery } from "@apollo/client";
 
 // reactstrap components
 import {
@@ -55,56 +54,25 @@ import {
   chartExample4,
 } from "variables/charts.js";
 
+const basicQuery = gql`
+  query app {
+    applications {
+        id
+        version
+        uri
+        avatar
+    }
+  }
+`
+
 function Dashboard(props) {
   const [bigChartData, setbigChartData] = React.useState("data1");
-  const [data, setData] = React.useState({});
-  const [loading, setLoading] = React.useState(true);
   const setBgChartData = (name) => {
     setbigChartData(name);
-  };
-  const defaultOptions = {
-    watchQuery: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'ignore',
-    },
-    query: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'all',
-    },
-  }
-  
-  const client = new ApolloClient({
-    link: new HttpLink({
-        fetch,
-        uri: 'http://34.146.117.200:8000/subgraphs/name/iotex/pebble-subgraph',
-    }),
-    cache: new InMemoryCache(),
-    defaultOptions
-  });
-  
+  }; 
 
-  React.useEffect( () => {
-    client.query({
-      query: gql`
-          query app {
-              applications {
-                  id
-                  version
-                  uri
-                  avatar
-              }
-          }
-      `,
-    }).then( response => {
-        setData(response.data);
-    }).catch( error => {
-      console.log(error);
-    }).finally( () => {
-      setLoading(false);
-    })
-  }, [])
+  const { loading, error, data } = useQuery( basicQuery, { variables: { id: "0x1904bfcb93edc9bf961eead2e5c0de81dcc1d37d" }});
 
-  console.log(data);
   return (
     <>
       <div className="content">
@@ -188,7 +156,7 @@ function Dashboard(props) {
             </Card>
           </Col>
         </Row>
-        <Row>
+        {/* <Row>
           <Col lg="4">
             <Card className="card-chart">
               <CardHeader>
@@ -576,8 +544,8 @@ function Dashboard(props) {
               </CardBody>
             </Card>
           </Col>
-        </Row>
-      </div>
+        </Row>*/}
+      </div> 
     </>
   );
 }

@@ -23,6 +23,8 @@ import Rtl from "views/Rtl.js";
 import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
+import DeviceProfile from "views/DeviceProfile.js";
+
 
 var routes = [
   {
@@ -57,14 +59,22 @@ var routes = [
   //   component: Notifications,
   //   layout: "/admin",
   // },
-  // {
-  //   path: "/user-profile",
-  //   name: "User Profile",
-  //   rtlName: "ملف تعريفي للمستخدم",
-  //   icon: "tim-icons icon-single-02",
-  //   component: UserProfile,
-  //   layout: "/admin",
-  // },
+  {
+    path: "/user-profile",
+    name: "User Profile",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: "tim-icons icon-single-02",
+    component: UserProfile,
+    layout: "/admin",
+  },
+  {
+    path: "/device-profile",
+    name: "Device Profile",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: "tim-icons icon-single-02",
+    component: DeviceProfile,
+    layout: "/admin",
+  },
   // {
   //   path: "/tables",
   //   name: "Table List",

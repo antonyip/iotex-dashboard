@@ -30,17 +30,45 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper";
 import BackgroundColorWrapper from "./components/BackgroundColorWrapper/BackgroundColorWrapper";
 
+import _ from 'lodash';
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client/core';
+import fetch from 'cross-fetch';
+import gql from 'graphql-tag';
+import { ApolloProvider } from "@apollo/client";
+
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'ignore',
+  },
+  query: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  },
+}
+
+const client = new ApolloClient({
+  link: new HttpLink({
+      fetch,
+      uri: 'http://34.146.117.200:8000/subgraphs/name/iotex/pebble-subgraph',
+  }),
+  cache: new InMemoryCache(),
+  defaultOptions
+});
+
 ReactDOM.render(
+  <ApolloProvider client={client}>
   <ThemeContextWrapper>
     <BackgroundColorWrapper>
       <BrowserRouter>
         <Switch>
           <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-          <Route path="/rtl" render={(props) => <RTLLayout {...props} />} />
+          {/* <Route path="/rtl" render={(props) => <RTLLayout {...props} />} /> */}
           <Redirect from="/" to="/admin/dashboard" />
         </Switch>
       </BrowserRouter>
     </BackgroundColorWrapper>
-  </ThemeContextWrapper>,
+  </ThemeContextWrapper>
+  </ApolloProvider>,
   document.getElementById("root")
 );

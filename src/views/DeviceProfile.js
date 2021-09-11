@@ -19,14 +19,9 @@ import React from "react";
 
 // reactstrap components
 import {
-  Button,
   Card,
-  CardHeader,
   CardBody,
-  CardFooter,
   CardText,
-  FormGroup,
-  Form,
   Input,
   Row,
   Col,
@@ -95,7 +90,7 @@ function DeviceProfile(props) {
   console.log( "idaa", idaa );
 
   const onSubmit = e => {
-    if (e.key == "Enter")
+    if (e.key === "Enter")
     {
       console.log("ss", searchString.target.value);
       console.log("enter pressed");
@@ -107,7 +102,7 @@ function DeviceProfile(props) {
   if (error) return <div className="content">{error}</div>;
   if (loading) return <div className="content">Loading...</div>;
 
-  if (data.deviceRecords == 0)
+  if (data.deviceRecords === 0)
   {
     return (
       <div className="content">

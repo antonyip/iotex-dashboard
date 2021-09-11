@@ -19,14 +19,9 @@ import React from "react";
 
 // reactstrap components
 import {
-  Button,
   Card,
-  CardHeader,
   CardBody,
-  CardFooter,
   CardText,
-  FormGroup,
-  Form,
   Input,
   Row,
   Col,
@@ -57,10 +52,10 @@ function UserProfile(props) {
   console.log("data", data);
 
   const onSubmit = e => {
-    if (e.key == "Enter")
+    if (e.key === "Enter")
     {
-      console.log("ss", searchString.target.value);
-      console.log("enter pressed");
+      //console.log("ss", searchString.target.value);
+      //console.log("enter pressed");
       window.location.assign("/admin/user-profile/" + searchString.target.value);
     } 
     return false;
@@ -69,7 +64,7 @@ function UserProfile(props) {
   if (error) return <div className="content">{error}</div>;
   if (loading) return <div className="content">Loading...</div>;
 
-  if (data.account === null)
+  if (data.account == null || data === null || data === undefined)
   {
     return (
       <div className="content">

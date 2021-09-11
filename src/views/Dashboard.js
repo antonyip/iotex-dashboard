@@ -106,7 +106,6 @@ function Dashboard(props) {
 
   console.log(data);
   return (
-    loading === false ?
     <>
       <div className="content">
         <Row>
@@ -580,7 +579,6 @@ function Dashboard(props) {
         </Row>
       </div>
     </>
-    : <div>Loading..</div>
   );
 }
 

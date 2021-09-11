@@ -43,14 +43,14 @@ var routes = [
   //   component: Icons,
   //   layout: "/admin",
   // },
-  {
-    path: "/map",
-    name: "Map",
-    rtlName: "خرائط",
-    icon: "tim-icons icon-pin",
-    component: Map,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/map",
+  //   name: "Map",
+  //   rtlName: "خرائط",
+  //   icon: "tim-icons icon-pin",
+  //   component: Map,
+  //   layout: "/admin",
+  // },
   // {
   //   path: "/notifications",
   //   name: "Notifications",
@@ -60,7 +60,7 @@ var routes = [
   //   layout: "/admin",
   // },
   {
-    path: "/user-profile",
+    path: "/user-profile/:idaa",
     name: "User Profile",
     rtlName: "ملف تعريفي للمستخدم",
     icon: "tim-icons icon-single-02",
@@ -68,7 +68,7 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/device-profile",
+    path: "/device-profile/:idaa",
     name: "Device Profile",
     rtlName: "ملف تعريفي للمستخدم",
     icon: "tim-icons icon-single-02",

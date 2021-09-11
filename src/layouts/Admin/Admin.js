@@ -109,8 +109,8 @@ function Admin(props) {
             <Sidebar
               routes={routes}
               logo={{
-                outterLink: "https://iotex.io/",
-                text: "IoTeX Dashboard",
+                outterLink: "/",
+                text: "IoTeX",
                 imgSrc: logo,
               }}
               toggleSidebar={toggleSidebar}
@@ -127,8 +127,8 @@ function Admin(props) {
               </Switch>
               {
                 // we don't want the Footer to be rendered on map page
-                //location.pathname === "/admin/maps" ? null : <Footer fluid />
-                location.pathname === "/admin/maps" ? null : null
+                location.pathname === "/admin/maps" ? null : <Footer fluid />
+                //location.pathname === "/admin/maps" ? null : null
               }
             </div>
           </div>

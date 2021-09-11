@@ -49,21 +49,58 @@ let accountQuery = gql`
 `
 
 function UserProfile(props) {
-  console.log("idaa", props);
-  console.log("idaa-search", props.location.search);
+  //http://localhost:3000/admin/user-profile/0x1904bfcb93edc9bf961eead2e5c0de81dcc1d37d
+  const { idaa } = useParams();
+  const { loading, error, data } = useQuery( accountQuery, { variables: { idaa: idaa }});
+  const [searchString, setSearchString] = React.useState("");
 
-  let searchString = props.location.search.length > 6 ? props.location.search.substring(6) : "0x1904bfcb93edc9bf961eead2e5c0de81dcc1d37d";
-
-  console.log("idaa-search-string", searchString);
-  const { loading, error, data } = useQuery( accountQuery, { variables: { idaa: searchString }});
   console.log("data", data);
+
+  const onSubmit = e => {
+    if (e.key == "Enter")
+    {
+      console.log("ss", searchString.target.value);
+      console.log("enter pressed");
+      window.location.assign("/admin/user-profile/" + searchString.target.value);
+    } 
+    return false;
+  };
 
   if (error) return <div className="content">{error}</div>;
   if (loading) return <div className="content">Loading...</div>;
 
+  if (data.account === null)
+  {
+    return (
+      <div className="content">
+        <div className="content">No Account Found...</div>
+        <Input
+        placeholder="Search an Account ID... (e.g 0x1904bfcb93edc9bf961eead2e5c0de81dcc1d37d)"
+        type="text"
+        value={searchString.value}
+        onChange={setSearchString}
+        id="idaa"
+        name="idaa"
+        onKeyDown={onSubmit}
+      />
+     </div>
+    );
+  }
+
   return (
     <>
       <div className="content">
+      <Input
+        placeholder="Search an Account ID... (e.g 0x1904bfcb93edc9bf961eead2e5c0de81dcc1d37d)"
+        type="text"
+        value={searchString.value}
+        onChange={setSearchString}
+        id="idaa"
+        name="idaa"
+        onKeyDown={onSubmit}
+      />
+
+      <br />
         <Row>
           <Col md="4"> 
             <Card className="card-user">

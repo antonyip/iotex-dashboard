@@ -7627,6 +7627,11 @@ js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+jsbi@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/jsbi/-/jsbi-3.2.4.tgz#aba5b77a14d7f546adc0bd17ab82c07e29f54e91"
+  integrity sha512-iOygwxPzMYli5xrjfd83Vy4Wyu9Ovpw6wWWFy5Kj7XP+pZxPp7Cy72F92iAt2j+6tTDYunvLtC+2tH3xCX37ng==
+
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"

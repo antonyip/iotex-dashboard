@@ -50,7 +50,8 @@ const defaultOptions = {
 const client = new ApolloClient({
   link: new HttpLink({
       fetch,
-      uri: 'http://34.146.117.200:8000/subgraphs/name/iotex/pebble-subgraph',
+      //uri: 'http://34.146.117.200:8000/subgraphs/name/iotex/pebble-subgraph',
+      uri: 'https://subgraph.iott.network:8000/subgraphs/name/iotex/pebble-subgraph/graphql',
   }),
   cache: new InMemoryCache(),
   defaultOptions
